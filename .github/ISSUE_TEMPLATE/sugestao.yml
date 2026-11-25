@@ -1,0 +1,85 @@
+name: Sugerir recurso
+description: Proponha um site, material, ferramenta ou IA para entrar na lista.
+title: "[Recurso] "
+labels: ["sugestao"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Leia o [guia de contribuição](https://github.com/MatheusFerrazz/awesome-devsec-appsec/blob/main/CONTRIBUTING.md)
+        antes de enviar. O formato da entrada e os critérios estão lá.
+  - type: input
+    id: nome
+    attributes:
+      label: Nome do recurso
+      placeholder: Semgrep
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      description: Link direto, sem encurtador e sem parâmetro de rastreamento.
+      placeholder: https://semgrep.dev/
+    validations:
+      required: true
+  - type: dropdown
+    id: secao
+    attributes:
+      label: Seção sugerida
+      options:
+        - Comece por aqui
+        - Padrões, frameworks e maturidade
+        - Aprender: cursos, labs e certificações
+        - Aplicações vulneráveis e CTFs
+        - SAST — análise estática
+        - DAST — análise dinâmica
+        - SCA, SBOM e dependências
+        - Segredos e credenciais
+        - IaC, Kubernetes e cloud
+        - Contêineres e supply chain
+        - APIs, GraphQL e JWT
+        - Fuzzing
+        - Orquestração e gestão de findings
+        - Segurança de CI/CD
+        - IA e LLMs para AppSec
+        - Segurança de IA e LLMs
+        - Threat modeling
+        - Cheatsheets e referências rápidas
+        - Bancos de vulnerabilidades e advisories
+        - Bug bounty
+        - Blogs, newsletters e podcasts
+        - Comunidades
+        - Conteúdo em português
+        - Imagens Docker prontas
+        - Não sei, sugiro uma seção nova
+    validations:
+      required: true
+  - type: textarea
+    id: descricao
+    attributes:
+      label: Descrição em uma linha
+      description: Comece com maiúscula e termine com ponto final. Diga o que o recurso faz.
+      placeholder: Análise estática rápida com regras por linguagem e detecção de fluxo de dados.
+      maxlength: 200
+    validations:
+      required: true
+  - type: checkboxes
+    id: marcadores
+    attributes:
+      label: Marcadores
+      options:
+        - label: Conteúdo em português (🇧🇷)
+        - label: Open source (🔓)
+        - label: Pago (💰)
+  - type: checkboxes
+    id: confirmacoes
+    attributes:
+      label: Confirmações
+      options:
+        - label: O recurso está ativo e recebeu atualização nos últimos 24 meses.
+          required: true
+        - label: Não é link de afiliado nem conteúdo gerado em massa.
+          required: true
+        - label: Verifiquei que o recurso ainda não está na lista.
+          required: true

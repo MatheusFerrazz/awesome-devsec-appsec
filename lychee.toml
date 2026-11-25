@@ -1,0 +1,24 @@
+# Configuração do lychee, usada pelo job "Verificar links" do CI.
+#
+# Os domínios em `exclude` recusam requisição automatizada com 403 ou 307
+# (Cloudflare, Sucuri, Reddit). Eles não estão mortos: abrem normalmente no
+# navegador. Verificar à mão quando a checagem semanal abrir issue.
+
+max_redirects = 10
+max_retries = 3
+timeout = 30
+max_concurrency = 8
+
+accept = ["200..=299", "429"]
+
+exclude = [
+  "https://www\\.openbugbounty\\.org/.*",
+  "https://www\\.bleepingcomputer\\.com/.*",
+  "https://www\\.reddit\\.com/r/.*",
+  "https://hackersdobem\\.org\\.br/.*",
+  "https://desecsecurity\\.com/.*",
+  "https://mentebinaria\\.com\\.br/.*",
+  "https://hackaflag\\.com\\.br/.*",
+  "https://thehackernews\\.com/.*",
+  "https://aicyberchallenge\\.com/.*",
+]

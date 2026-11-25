@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  lint:
+    name: Validar formato da lista
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Rodar awesome-lint
+        run: ./scripts/check.sh lint
+
+  links:
+    name: Verificar links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checar links com lychee
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --config lychee.toml
+            --verbose
+            --no-progress
+            README.md
+            CONTRIBUTING.md
+            CODE_OF_CONDUCT.md
+          fail: true
+      - name: Abrir issue quando a checagem agendada falhar
+        if: failure() && github.event_name == 'schedule'
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Links quebrados encontrados na checagem semanal
+          content-filepath: ./lychee/out.md
+          labels: link-quebrado
